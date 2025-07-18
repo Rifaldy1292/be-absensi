@@ -19,7 +19,7 @@ model User {
   email      String   @unique
   password   String
   role       String   // e.g. 'admin', 'hr'
-  created_at DateTime @default(now())
+  createdAt DateTime @default(now())
 }
 
 model Employee {
@@ -29,7 +29,7 @@ model Employee {
   name       String
   position   String
   department String
-  created_at DateTime   @default(now())
+  createdAt DateTime   @default(now())
 
   attendances Attendance[]
   scan_logs   ScanLog[]
@@ -42,6 +42,7 @@ model Attendance {
   time_in      DateTime?
   time_out     DateTime?
   total_hours  String?
+  createdAt DateTime   @default(now())
 
   employee     Employee   @relation(fields: [employee_id], references: [id])
   scan_logs    ScanLog[]

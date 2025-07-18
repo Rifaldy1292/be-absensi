@@ -29,3 +29,11 @@ GET /attendance/:id → Detail absensi (opsional)
 # GET /attendance?employee_id=UUID → Filter absensi per karyawan
 
 # Semua endpoint (kecuali /auth/login) membutuhkan JWT token
+
+# untuk isi seeder
+
+npx ts-node prisma/seed.ts
+
+# untuk start
+
+npm run start:dev

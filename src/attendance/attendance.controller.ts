@@ -1,34 +1,37 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { AttendanceService } from './attendance.service';
-import { CreateAttendanceDto } from './dto/create-attendance.dto';
-import { UpdateAttendanceDto } from './dto/update-attendance.dto';
 
 @Controller('attendance')
 export class AttendanceController {
   constructor(private readonly attendanceService: AttendanceService) {}
 
-  @Post()
-  create(@Body() createAttendanceDto: CreateAttendanceDto) {
-    return this.attendanceService.create(createAttendanceDto);
-  }
-
+  // Ambil semua data absensi (optional)
   @Get()
   findAll() {
     return this.attendanceService.findAll();
   }
 
+  // Ambil absensi hari ini
+  @Get('daily')
+  findDaily() {
+    return this.attendanceService.findDaily();
+  }
+
+  // Ambil absensi minggu ini
+  @Get('weekly')
+  findWeekly() {
+    return this.attendanceService.findWeekly();
+  }
+
+  // Ambil absensi bulan ini
+  @Get('monthly')
+  findMonthly() {
+    return this.attendanceService.findMonthly();
+  }
+
+  // Ambil detail absensi by ID (optional)
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.attendanceService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAttendanceDto: UpdateAttendanceDto) {
-    return this.attendanceService.update(+id, updateAttendanceDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.attendanceService.remove(+id);
+    return this.attendanceService.findOne(id);
   }
 }
