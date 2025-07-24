@@ -7,6 +7,7 @@
 # 🔐 AUTH
 
 POST /auth/login → Login Admin (return JWT)
+get /auth/me
 
 # 👥 EMPLOYEES (Data Karyawan)
 

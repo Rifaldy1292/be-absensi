@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { ScanLogsService } from './scan-logs.service';
 import { CreateScanLogDto } from './dto/create-scan-log.dto';
 import { UpdateScanLogDto } from './dto/update-scan-log.dto';
@@ -18,17 +27,20 @@ export class ScanLogsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.scanLogsService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.scanLogsService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateScanLogDto: UpdateScanLogDto) {
-    return this.scanLogsService.update(+id, updateScanLogDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateScanLogDto: UpdateScanLogDto,
+  ) {
+    return this.scanLogsService.update(id, updateScanLogDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.scanLogsService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.scanLogsService.remove(id);
   }
 }

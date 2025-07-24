@@ -17,20 +17,20 @@ export class EmployeesService {
     });
   }
 
-  findOne(id: string) {
+  findOne(id: number) {
     return this.prisma.employee.findUnique({
       where: { id },
     });
   }
 
-  update(id: string, dto: UpdateEmployeeDto) {
+  update(id: number, dto: UpdateEmployeeDto) {
     return this.prisma.employee.update({
       where: { id },
       data: dto,
     });
   }
 
-  remove(id: string) {
+  remove(id: number) {
     return this.prisma.employee.delete({
       where: { id },
     });

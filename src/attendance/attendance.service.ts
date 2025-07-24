@@ -5,14 +5,16 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class AttendanceService {
   constructor(private prisma: PrismaService) {}
 
-  // Ambil semua data absensi
-  findAll() {
+  async findAll() {
     return this.prisma.attendance.findMany({
       orderBy: { createdAt: 'desc' },
+      include: {
+        employee: true,
+        scan_logs: true,
+      },
     });
   }
 
-  // Ambil absensi hari ini
   async findDaily() {
     const today = new Date();
     const startOfDay = new Date(today.setHours(0, 0, 0, 0));
@@ -28,10 +30,9 @@ export class AttendanceService {
     });
   }
 
-  // Ambil absensi minggu ini
   async findWeekly() {
     const now = new Date();
-    const first = now.getDate() - now.getDay(); // hari Minggu
+    const first = now.getDate() - now.getDay();
     const startOfWeek = new Date(now.setDate(first));
     startOfWeek.setHours(0, 0, 0, 0);
     const endOfWeek = new Date(startOfWeek);
@@ -48,7 +49,6 @@ export class AttendanceService {
     });
   }
 
-  // Ambil absensi bulan ini
   async findMonthly() {
     const now = new Date();
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
@@ -72,10 +72,9 @@ export class AttendanceService {
     });
   }
 
-  // Ambil detail absensi tertentu
-  findOne(id: string) {
+  findOne(id: number) {
     return this.prisma.attendance.findUnique({
-      where: { id: String(id) },
+      where: { id: id },
     });
   }
 }

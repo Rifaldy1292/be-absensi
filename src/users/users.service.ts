@@ -1,17 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import * as bcrypt from 'bcrypt'; // ← WAJIB ini biar tidak error
-
+import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
-  // Simulasi user dummy
   private users = [
     {
       id: 1,
       username: 'admin',
-      password: bcrypt.hashSync('123456', 10), // password asli: 123456
+      password: bcrypt.hashSync('123456', 10),
     },
   ];
 

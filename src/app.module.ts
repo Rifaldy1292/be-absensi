@@ -7,7 +7,7 @@ import { AttendanceModule } from './attendance/attendance.module';
 import { ScanLogsModule } from './scan-logs/scan-logs.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { WsModule } from './ws/ws.module';
+// import { WsModule } from './ws/ws.module';
 @Module({
   imports: [
     PrismaModule,
@@ -16,7 +16,7 @@ import { WsModule } from './ws/ws.module';
     ScanLogsModule,
     UsersModule,
     AuthModule,
-    WsModule,
+    // WsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -8,54 +8,52 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql" // ganti kalau kamu pakai MySQL
+  provider = "mysql" 
   url      = env("DATABASE_URL")
 }
-
-
 model User {
-  id         String   @id @default(uuid())
-  name       String
-  email      String   @unique
-  password   String
-  role       String   // e.g. 'admin', 'hr'
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      String
   createdAt DateTime @default(now())
 }
 
 model Employee {
-  id         String     @id @default(uuid())
-  rfid_code  String     @unique
-  nik        String     @unique
+  id         Int       @id @default(autoincrement())
+  rfid_code  String    @unique
+  nik        String    @unique
   name       String
   position   String
   department String
-  createdAt DateTime   @default(now())
+  createdAt  DateTime  @default(now())
 
   attendances Attendance[]
   scan_logs   ScanLog[]
 }
 
 model Attendance {
-  id           String     @id @default(uuid())
-  employee_id  String
-  date         DateTime   // Only date will be used
+  id           Int       @id @default(autoincrement())
+  employee_id  Int
+  date         DateTime
   time_in      DateTime?
   time_out     DateTime?
   total_hours  String?
-  createdAt DateTime   @default(now())
+  createdAt    DateTime  @default(now())
 
-  employee     Employee   @relation(fields: [employee_id], references: [id])
+  employee     Employee  @relation(fields: [employee_id], references: [id], onDelete: Cascade)
   scan_logs    ScanLog[]
 }
 
 model ScanLog {
-  id            String     @id @default(uuid())
-  employee_id   String
-  attendance_id String?    // Nullable
+  id            Int        @id @default(autoincrement())
+  employee_id   Int
+  attendance_id Int?       
   timestamp     DateTime
-  scan_type     String     // 'in' or 'out', gunakan enum kalau mau lebih rapih
-  source        String     // Device/location info
+  scan_type     String
+  source        String
 
-  employee      Employee   @relation(fields: [employee_id], references: [id])
-  attendance    Attendance? @relation(fields: [attendance_id], references: [id])
+  employee      Employee   @relation(fields: [employee_id], references: [id], onDelete: Cascade)
+  attendance    Attendance? @relation(fields: [attendance_id], references: [id], onDelete: SetNull)
 }
