@@ -22,7 +22,7 @@ model User {
 
 model Employee {
   id         Int       @id @default(autoincrement())
-  rfid_code  String    @unique
+  rfid_code  Int    @unique
   nik        String    @unique
   name       String
   position   String
@@ -39,7 +39,7 @@ model Attendance {
   date         DateTime
   time_in      DateTime?
   time_out     DateTime?
-  total_hours  String?
+  total_hours  Int?
   createdAt    DateTime  @default(now())
 
   employee     Employee  @relation(fields: [employee_id], references: [id], onDelete: Cascade)

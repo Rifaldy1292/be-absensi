@@ -1,5 +1,6 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { AttendanceService } from './attendance.service';
+import { CreateAttendanceDto } from './dto/create-attendance.dto';
 
 @Controller('attendance')
 export class AttendanceController {
@@ -28,5 +29,9 @@ export class AttendanceController {
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.attendanceService.findOne(id);
+  }
+  @Post()
+  create(@Body() createAttendanceDto: CreateAttendanceDto) {
+    return this.attendanceService.logAttendance(createAttendanceDto);
   }
 }

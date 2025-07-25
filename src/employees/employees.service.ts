@@ -17,9 +17,9 @@ export class EmployeesService {
     });
   }
 
-  findOne(id: number) {
+  findOne(rfid_code: number) {
     return this.prisma.employee.findUnique({
-      where: { id },
+      where: { rfid_code },
     });
   }
 

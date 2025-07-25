@@ -1,5 +1,5 @@
 export type CreateEmployeeDto = {
-  rfid_code: string;
+  rfid_code: number;
   nik: string;
   name: string;
   position: string;
