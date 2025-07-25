@@ -39,7 +39,7 @@ model Attendance {
   date         DateTime
   time_in      DateTime?
   time_out     DateTime?
-  total_hours  Int?
+  total_hours  Float? 
   createdAt    DateTime  @default(now())
 
   employee     Employee  @relation(fields: [employee_id], references: [id], onDelete: Cascade)
