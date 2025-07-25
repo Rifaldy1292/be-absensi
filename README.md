@@ -24,4 +24,4 @@ npx prisma studio
 
 # isi seed
 
-npm run seed
+npm run seed //tidak perlu di production

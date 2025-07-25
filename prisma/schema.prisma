@@ -22,7 +22,7 @@ model User {
 
 model Employee {
   id         Int       @id @default(autoincrement())
-  rfid_code  Int    @unique
+  rfid_code  String   @unique
   nik        String    @unique
   name       String
   position   String

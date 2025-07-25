@@ -14,7 +14,7 @@ CREATE TABLE `User` (
 -- CreateTable
 CREATE TABLE `Employee` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `rfid_code` INTEGER NOT NULL,
+    `rfid_code` VARCHAR(191) NOT NULL,
     `nik` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `position` VARCHAR(191) NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE `Attendance` (
     `date` DATETIME(3) NOT NULL,
     `time_in` DATETIME(3) NULL,
     `time_out` DATETIME(3) NULL,
-    `total_hours` VARCHAR(191) NULL,
+    `total_hours` DOUBLE NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`id`)

@@ -27,7 +27,7 @@ export class EmployeesController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id') id: string) {
     return this.employeesService.findOne(id); // Kalau id di schema Int
   }
 
